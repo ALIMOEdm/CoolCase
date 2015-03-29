@@ -1,0 +1,404 @@
+.header {
+    text-align: center;
+    background-color: #444;
+    color: whitesmoke;
+    line-height: 100px;
+    padding: 20px 0;
+}
+
+.site-title {
+    font-weight: 700;
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: whitesmoke;
+    display: none;
+}
+
+body {
+    font-family: roboto;
+}
+
+.left-button {
+    display: block;
+    line-height: 66px;
+    background-color: #444;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    border-left: 15px solid #333;
+    color: darkgrey;
+    margin-bottom: -1px;
+    -webkit-transition: 0.3s linear;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.left-button:hover {
+    background-color: #333;
+    color: whitesmoke;
+}
+
+.left-button:focus,
+.left-button:active {
+    background-color: #bbb;
+    color: #333;
+    border-color: #bbb;
+}
+
+.right-button {
+    line-height: 60px;
+    background-color: #444;
+    border: 1px solid #333;
+    border-right: 15px solid #333;
+    color: darkgrey;
+    margin-bottom: -1px;
+    -webkit-transition: 0.3s linear;
+    transition: 0.3s linear;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+}
+
+.right-button:hover {
+    background-color: #333;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.right-button:focus,
+.right-button:active {
+    background-color: #bbb;
+    color: #333;
+    border-right: 15px solid #bbb;
+    border-color: #bbb;
+}
+
+.buttons {
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    width: 200px;
+}
+
+.case-make {
+    background-image: url(../images/skulls.png);
+}
+
+.block-title {
+    font-weight: 700;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.phone-maket {
+    background-image: url(../images/models/iPhone5c.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 555px;
+    margin: auto;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.block-content {
+    padding: 10px 0;
+}
+
+.gallery {
+    width: 100%;
+    background-color: #444;
+    padding: 20px;
+    min-height: 200px;
+}
+
+#owl-demo .item {
+    margin: 3px;
+}
+
+#owl-demo .item img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.move-top {
+    background-color: green;
+}
+
+.move-bottom {
+    background-color: black;
+}
+
+.background {
+    width: 200px;
+    background-color: #444;
+    border-right: 15px solid #333;
+}
+
+.peretaska {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(112, 188, 179);
+    opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+}
+
+.background:hover .peretaska {
+    opacity: 0.75;
+}
+
+.effect {
+    display: inline-block;
+    width: 50%;
+    height: 100px;
+    padding: 40px 0;
+    background-color: gray;
+    font-size: 15px;
+    font-weight: 400;
+    float: left;
+    cursor: pointer;
+}
+
+.effect:hover {
+    background-color: darkgray;
+}
+
+.spoiler-effects {
+    width: 100%;
+    border-radius: 0;
+}
+
+.well {
+    border-radius: 0;
+}
+
+input[type="file"] {
+    width: 100%;
+    color: rgba(255, 255, 255, 0);
+    opacity: 0;
+    margin-top: -68px;
+    cursor: pointer;
+}
+
+.effect-title {
+    display: block;
+}
+
+.zoom-btn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 12px;
+    margin: 0 15px;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.zoom-btn:hover {
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.2);
+}
+
+.zoom {
+    padding: 0 130px;
+    margin-top: -100px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+}
+
+.image_print_list img{
+	width: 150px;
+	height: 150px;
+}
+
+.move_general[move_action=top]{
+}
+.move_general[move_action=bottom]{
+
+}
+.move_general[move_action=left]{
+
+}
+.move_general[move_action=right]{
+}
+.move_general[move_action=rotate]{
+}
+
+.move_hidden{
+	display : none;
+}
+
+
+
+.move-btn{
+    display: block;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    padding: 19px;
+    border-bottom: 1px solid #333;
+
+    cursor: pointer;
+    transition: 0.5s;
+    color: darkgrey;
+}
+
+.move-btn:hover {
+    color: whitesmoke;
+    background-color: #333;
+}
+
+
+.preview-block canvas {
+    margin: 0 auto;
+    padding: 0;
+}
+.image_print_actions{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	padding: 0 15px;
+}
+.image_print_actions_act{
+	float: right;
+	width: 30px;
+	padding-right : 10px;
+}
+.image_print_actions-wrapper:after{
+	content:'';
+    display:block;
+    clear: both;
+}
+.image_print_actions-wrapper{
+	background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 0;
+}
+
+.action-btn{
+    margin-left: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-btn:hover{
+    transform: scale(1.1);
+}
+
+.thumbnail{
+    border: none;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+.thumbnail:hover{
+    box-shadow: 0px 0px 5px white;
+}
+.thumbnail:active, .thumbnail:focus{
+    box-shadow: 0px 0px 10px white;
+}
+
+
+.move-btns1 {
+    width: 85%;
+    height: 85%;
+    margin: auto;
+}
+
+.preview-block {
+    margin: auto;
+}
+
+
+
+.phone-model {
+    line-height: 60px;
+    background-color: grey;
+    color: whitesmoke;
+    margin-bottom: -1px;
+    -webkit-transition: 0.3s linear;
+    transition: 0.3s linear;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+}
+
+.phone-model:hover {
+    background-color: darkgrey;
+}
+
+
+
+.fw {
+    width: 1024px;
+}
+
+.model-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 1cm;
+    height: 1cm;
+    border: solid 2px rgba(222,60,80,.9);
+    box-sizing: content-box;
+    pointer-events: none;
+}
+
+.crop_container{
+	text-align: center;
+}
+.form-group-cst{
+	margin-bottom: 10px;
+	width : 48%;
+	display: inline-block;
+	margin-right : 1%;
+}
+.size_crop_formcontent{
+	width: 90%;
+	margin : 0 auto;
+}
+.size_crop_formcontent .save_btn{
+	width : 98%;
+}
+.preloader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(100, 100, 100, .5);
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+}
+.preloader i{
+      position: absolute;
+}

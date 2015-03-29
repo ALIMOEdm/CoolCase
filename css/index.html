@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="owlCarousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="owlCarousel/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="owlCarousel/owl-carousel/owl.transitions.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">Cool Case Constructor</h1>
+        </div>
+    </header>
+
+    <section class="block-content case-make">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-3 block-content">
+                    <h3 class="text-left block-title">Модель</h3>
+                    <div class="phone-models buttons">
+                        <div class="i4 phone-model left-button"><span class="model-title">iPhone 4/4s</span>
+                        </div>
+                        <div class="i5 phone-model left-button"><span class="model-title">iPhone 5/5s</span>
+                        </div>
+                        <div class="i5c phone-model left-button"><span class="model-title">iPhone 5c</span>
+                        </div>
+                        <div class="i6 phone-model left-button"><span class="model-title">iPhone 6/6+</span>
+                        </div>
+                        <div class="s3 phone-model left-button"><span class="model-title">Samsung Galaxy S3</span>
+                        </div>
+                        <div class="s4 phone-model left-button"><span class="model-title">Samsung Galaxy S4</span>
+                        </div>
+                        <div class="s5 phone-model left-button"><span class="model-title">Samsung Galaxy S5</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 block-content">
+                    <div class="preview-block">
+                        <div class="phone-maket">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 block-content">
+                    <h3 class="text-left block-title">Настройки</h3>
+                    <div class="preferences buttons">
+                        <div class="right-button"><span class="model-title">Загрузить картинку</span>
+                            <input name="select-print" type="file">
+                        </div>
+                        <div class="right-button"><span class="model-title">Редактировать принт</span>
+                        </div>
+                        <div class="right-button"><span class="model-title">Выбрать логотип</span>
+                            <input name="select-logo" type="file">
+                        </div>
+                        <div class="right-button"><span class="model-title">Редактировать логотип</span>
+                        </div>
+                        <div class="right-button"><span class="model-title">Сохранить макет</span>
+                        </div>
+                        <div class="right-button"><span class="model-title">Печать принта</span>
+                        </div>
+                        <div class="right-button" data-toggle="modal" data-target="#order"><span class="model-title">Заказать</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Заказ чехла</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Введите контактные данные</p>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Имя">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+                            <input type="text" class="form-control" placeholder="E-Mail">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fw fa-phone"></i></span>
+                            <input type="text" class="form-control" placeholder="Телефон для связи">
+                        </div>
+                        <textarea class="form-control" rows="3" placeholder="Комментарий"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-primary">Сделать заказ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="gallery">
+            <div id="owl-demo">
+                <div class="item"><img src="images/models/iphone4/iPhone4.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone5/iPhone5.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone5c/iPhone5c.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone6/iPhone6.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone6/iPhone6.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone6/iPhone6.png" alt="Owl Image">
+                </div>
+                <div class="item"><img src="images/models/iphone6/iPhone6.png" alt="Owl Image">
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="owlCarousel/owl-carousel/owl.carousel.js"></script>
+    <script src="js/scripts.js"></script>
+
+
+</body>
+
+</html>
