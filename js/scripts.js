@@ -97,6 +97,19 @@ ImagesList.prototype.addImage = function (type, img_ob, action) {
         var action_2 = action;
         img_ob.load(function () {
             that.addNewPrint(img_ob);
+            
+            var tpl_h = that.getMainTemplateHeight();
+            var tpl_w = that.getMainTemplateWidth();
+            var ob_h = img_ob.height;
+            var ob_w = img_ob.width;
+            
+            //пробуем центрировать относительно центра
+            var curprint = that.getCurrentPrint();
+            var res_h = (ob_h - tpl_h) / 2;
+            curprint.y_pos = -res_h;
+            var res_w = (ob_w - tpl_w) / 2;
+            curprint.x_pos = -res_w;
+            
             that.canva.drawImage(img_ob);
             //that.canva.context.globalCompositeOperation = compositeTypes[3];
             that.canva.setSourceAtopDisplayMode();
@@ -106,7 +119,7 @@ ImagesList.prototype.addImage = function (type, img_ob, action) {
                 var out_tpl = new Template();
                 out_tpl.configure(template["tpl_outer"]);
                 that.addImage("tpl_outer", out_tpl);
-            }
+            } 
             if (action_2)
                 action_2();
         });
@@ -144,6 +157,18 @@ ImagesList.prototype.crearPrints = function(){
 	this.prints = [];
 }
 
+ImagesList.prototype.crearTplOuter = function(){
+	this.tpl_outer = null;
+}
+
+ImagesList.prototype.getMainTemplateWidth = function(){
+	return this.tpl_main.getWidth();
+}
+
+ImagesList.prototype.getMainTemplateHeight = function(){
+	return this.tpl_main.getHeight();
+}
+
 ImagesList.prototype.hasTemplate = function(){
 	if(this.tpl_main)
 		return true;
@@ -153,6 +178,8 @@ ImagesList.prototype.hasTemplate = function(){
 ImagesList.prototype.getCanvasData = function(){
 	return this.canva.canvas.toDataURL("image/png");
 }
+
+
 
 ImagesList.prototype.removeImages = function(){
 	if(this.prints.length){
@@ -362,6 +389,14 @@ Parent.prototype.setZoomCoef = function (coef) {
     this.zoom_coef = coef;
 }
 
+Parent.prototype.getWidth = function () {
+    return this.img.width;
+}
+
+Parent.prototype.getHeight = function () {
+    return this.img.height;
+}
+
 var Template = function () {}
 Template.prototype = new Parent();
 
@@ -408,16 +443,19 @@ canvas.setContext();
 var img_list = new ImagesList(canvas);
 
 function initialTemplate() {
-    img_list = new ImagesList(canvas);
     var full_tpl = new Template();
     full_tpl.configure(template["tpl_main"]);
     
     var shadow_tpl = new Template();
     shadow_tpl.configure(template["tpl_shadow"]);
-
-    img_list.addImage('tpl_main', full_tpl, function () {});
+    
+    var back_tpl = new Template();
+    back_tpl.configure(template["tpl_outer"]);
+    img_list.crearTplOuter();
+    img_list.addImage('tpl_main', full_tpl, function () {img_list.refreshImg(true);});
     img_list.addImage('tpl_shadow', shadow_tpl, function () {});
-    document.querySelector("#print_images_list").innerHTML = "";
+    img_list.addImage('tpl_outer', back_tpl, function () {});
+    
 }
 
 $(document).ready(function () {
@@ -474,37 +512,37 @@ $(document).ready(function () {
         var max_step = 8;
 
         function movies(move_with) {
-			console.log(move_with, isMouseUp);
-			if(move_with){
-				img_list.refreshImg(move_with);
-				return;
-			}
-			var print = img_list.getCurrentPrint();
+            console.log(move_with, isMouseUp);
+            if(move_with){
+                    img_list.refreshImg(move_with);
+                    return;
+            }
+            var print = img_list.getCurrentPrint();
             switch (move_action) {
-				case "close":
-					break;
-				case "top":
-					print.y_pos -= step;
-					break;
-				case "bottom":
-					print.y_pos += step;
-					break;
-				case "left":
-					print.x_pos -= step
-					break;
-				case "right":
-					print.x_pos += step;
-					break;
-				case "rotate-right":
-					var TO_RADIANS = Math.PI / 180;
-					angle = print.getRotateUngle() + step;
-					print.setRotateUngle(angle);
-					break;
-				case "rotate-left":
-					var TO_RADIANS = Math.PI / 180;
-					angle = print.getRotateUngle() - step;
-					print.setRotateUngle(angle);
-					break;
+                case "close":
+                        break;
+                case "top":
+                        print.y_pos -= step;
+                        break;
+                case "bottom":
+                        print.y_pos += step;
+                        break;
+                case "left":
+                        print.x_pos -= step
+                        break;
+                case "right":
+                        print.x_pos += step;
+                        break;
+                case "rotate-right":
+                        var TO_RADIANS = Math.PI / 180;
+                        angle = print.getRotateUngle() + step;
+                        print.setRotateUngle(angle);
+                        break;
+                case "rotate-left":
+                        var TO_RADIANS = Math.PI / 180;
+                        angle = print.getRotateUngle() - step;
+                        print.setRotateUngle(angle);
+                        break;
             }
             img_list.refreshImg(move_with);
         }
@@ -601,12 +639,9 @@ $(document).ready(function () {
                 var print = new Print();
                 print.configure(e.target.result);
 
-				if(!img_list.hasTemplate()){
-					return;
-				}
-                //img_list.canva.context.globalCompositeOperation = compositeTypes[3];
-				//img_list.canva.setSourceAtopDisplayMode();
-				
+                if(!img_list.hasTemplate()){
+                        return;
+                }
                 img_list.addImage('print', print);
                 setTimeout(function () {
                     var print = img_list.getCurrentPrint();
@@ -667,6 +702,8 @@ $(document).ready(function () {
         cnv2.setAttribute('height', cur_print.img.height);
         cur_print.crossOrigin = "Anonymous";
         cntx.drawImage(cur_print.img, 0, 0);
+        var w_old = cur_print.getWidth();
+        var h_old = cur_print.getHeight();
         switch (effects) {
         case "resize_pl":
             var coeff = 0.05;
@@ -682,14 +719,21 @@ $(document).ready(function () {
         cur_print.isLoadAction = false;
         cur_print.img.src = cnv2.toDataURL("image/png");
         cur_print.img.onload = function(){
+            var w_new = cur_print.getWidth();
+            var h_new = cur_print.getHeight();
+            
+            var w_d = (w_old - w_new) / 2;
+            var h_d = (h_old - h_new) / 2;
+            
+            cur_print.x_pos += w_d;
+            cur_print.y_pos += h_d;
+            
             img_list.refreshImg(true);
+            cur_print.img.onload = function(){};
         }
     });
 	
 	document.querySelector(".showAct").addEventListener("click", showPreviu);
-        
-        
-	
 	
 	document.querySelector(".reflectionAct").addEventListener("click", function (event) {
         event = event || window.event;
@@ -785,11 +829,11 @@ $(document).ready(function () {
         cur_print.isLoadAction = false;
         cur_print.img.src = cnv2.toDataURL("image/png");
         cur_print.img.onload = function(){
-            cnv2.width = 1;
-            cnv2.height = 1;
-            cnv3.width = 1;
-            cnv3.height = 1;
-            img_list.refreshImg(true);
+        cnv2.width = 1;
+        cnv2.height = 1;
+        cnv3.width = 1;
+        cnv3.height = 1;
+        img_list.refreshImg(true);
         }
         cur_print.img_cache.src = cnv3.toDataURL("image/png");       
     });
@@ -1304,7 +1348,7 @@ function showPreviu(event){
     event = normaliseEvent(event);
     var src = event.target;
     var effects = src.getAttribute("shows");
-    var cur_print = img_list.getCurrentPrint();
+//    var cur_print = img_list.getCurrentPrint();
     var cnv2 = document.createElement("canvas");
     var cntx = cnv2.getContext("2d");
 
@@ -1335,7 +1379,7 @@ function showPreviu(event){
                 cntx.save();
                 cntx.translate(prints[i].x_pos, prints[i].y_pos );
                 cntx.translate(prints[i].width / 2, prints[i].height / 2 );
-                angle = prints[i].getRotateUngle();
+                var angle = prints[i].getRotateUngle();
                 cntx.rotate(angle * TO_RADIANS);
                 cntx.drawImage(prints[i].img, -(prints[i].width / 2), -(prints[i].height / 2));
                 cntx.restore();
@@ -1349,10 +1393,18 @@ function showPreviu(event){
                 document.querySelector(".size_crop_control_wr").style.width = cnv2.width + "px";
                 document.querySelector(".size_crop_control_wr").style.margin = "0 auto";
                 var overlay = document.querySelector(".overlay");
-                var img_width = document.querySelector(".crop_container img").width;
-                var img_height = document.querySelector(".crop_container img").height;
-                var top = (img_height - overlay.clientHeight) / 2;
-                var left = (img_width - overlay.clientWidth) / 2;
+//                var img_width = document.querySelector(".crop_container img").width;
+//                var img_height = document.querySelector(".crop_container img").height;
+                
+                var w_1 = img_list.getMainTemplateWidth();//img_list.tpl_main.img.width;
+                var h_1 = img_list.getMainTemplateHeight();//img_list.tpl_main.img.height;
+                
+                var top = (h_1 - overlay.clientHeight) / 2;
+//                var top = (img_height - overlay.clientHeight) / 2;
+//                var top = h_1 / 2;
+//                var left = w_1 / 2;
+                var left = (w_1 - overlay.clientWidth) / 2;
+//                var left = (img_width - overlay.clientWidth) / 2;
                 document.querySelector(".overlay").style.top = top + "px";
                 document.querySelector(".overlay").style.left = left + "px";
 
@@ -1388,7 +1440,8 @@ function crop(image_target){
 
 	console.log(left, top, width, height, 0, 0, width, height);
 	crop_canvas.getContext('2d').drawImage(image_target, left, top, width, height, 0, 0, width, height);
-	saveImage(crop_canvas.toDataURL("image/png"));
+        var print_name = jQuery("#print_name").val();
+	saveImage(crop_canvas.toDataURL("image/png"), print_name);
 	
 }
 
@@ -1403,10 +1456,17 @@ function resizeTT(el){
 			document.querySelector(".overlay").style.height = val + "cm";
 		}
 		var overlay = document.querySelector(".overlay");
-		var img_width = document.querySelector(".crop_container img").width;
-		var img_height = document.querySelector(".crop_container img").height;
-		var top = (img_height - overlay.clientHeight) / 2;
-		var left = (img_width - overlay.clientWidth) / 2;
+//		var img_width = document.querySelector(".crop_container img").width;
+//		var img_height = document.querySelector(".crop_container img").height;
+                
+                var w_1 = img_list.getMainTemplateWidth();//img_list.tpl_main.img.width;
+                var h_1 = img_list.getMainTemplateHeight();//img_list.tpl_main.img.height;
+                
+                var top = (h_1 - overlay.clientHeight) / 2;
+                var left = (w_1 - overlay.clientWidth) / 2;
+                
+//		var top = (img_height - overlay.clientHeight) / 2;
+//		var left = (img_width - overlay.clientWidth) / 2;
 		document.querySelector(".overlay").style.top = top + "px";
 		document.querySelector(".overlay").style.left = left + "px";
 	}
@@ -1438,17 +1498,21 @@ function saveBtn(){
         if(img_list.tpl_shadow && img_list.tpl_shadow.img){
             cntx.drawImage(img_list.tpl_shadow.img, koef_width, koef_height);
         }
+        var print_name = jQuery("#maket_name").val();
         cntx.drawImage(im2, koef_width, koef_height);
-        saveImage(cnv2.toDataURL("image/png"));
+        saveImage(cnv2.toDataURL("image/png"), print_name);
 
     }
 }
 
-function saveImage(src){
+function saveImage(src, print_name){
+    if(!print_name){
+        print_name = "print";
+    }
     jQuery.ajax({
         type: "post",
         url: "save_image.php",
-        data: "src="+src,
+        data: "print_name="+print_name+"&src="+src,
         success: function(data){
             window.open(location.pathname + "save_image.php?path="+data);
             actionPreloader(false);
@@ -1464,9 +1528,7 @@ function actionPreloader(isShow){
         jQuery(".preloader").show();
         var position_top = jQuery(".preloader").height() / 2 - jQuery(".preloader i").height() / 2;
         jQuery(".preloader i").css("top", position_top+"px");
-        
     }else{
         jQuery(".preloader").hide();
     }
-    
 }

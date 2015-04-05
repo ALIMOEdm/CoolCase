@@ -400,5 +400,13 @@ input[type="file"] {
     display: none;
 }
 .preloader i{
-      position: absolute;
+    position: absolute;
+}
+.form-group_maket_name{
+    margin-bottom: 0; 
+}
+.maket_name{
+    padding: 10px;
+    height: 60px;
+    border-radius: 0; 
 }

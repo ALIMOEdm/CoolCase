@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Cool Case Constructor</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -62,9 +62,17 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-
-                        <div class="left-button" onclick="saveBtn()"><span class="model-title">Сохранить макет</span>
+                        <div class="left-button">
+                            <div class="form-group_maket_name">
+                                <label for="maket_name">Название макета</label>
+                                <input type="text" class="form-control maket_name" id="maket_name" value="maket" placeholder="Введите имя сохраняемого макета" ac="maket_name">
+                            </div>
                         </div>
+                        <div class="left-button" onclick="saveBtn()">
+                            <span class="model-title">Сохранить макет</span>
+                        </div>
+                        
+                        
 
                         <div class="left-button" onclick="showPreviu(event)"><span shows="show" class="model-title">Сохранить принт</span>
                         </div>
@@ -90,18 +98,18 @@
                             <i class="move_general move-btn fa fa-plus fa-2x" effects="resize_pl"></i>
                             <i class="move_general move-btn fa fa-minus fa-2x" effects="resize_min"></i>
                         </div>
-						<div style="display:inline;" class="reflectionAct">
-							<i class="move_general move-btn fa fa-arrows-h fa-2x" reflection="reflection-h"></i>
-							<i class="move_general move-btn fa fa-arrows-v fa-2x" reflection="reflection-v"></i>
-						</div>
+                        <div style="display:inline;" class="reflectionAct">
+                                <i class="move_general move-btn fa fa-arrows-h fa-2x" reflection="reflection-h"></i>
+                                <i class="move_general move-btn fa fa-arrows-v fa-2x" reflection="reflection-v"></i>
+                        </div>
                         <i class="move_general move-btn fa fa-rotate-left fa-2x" move_action="rotate-left"></i>
                         <i class="move_general move-btn fa fa-rotate-right fa-2x" move_action="rotate-right"></i>
-						<div style="display:inline;" class="showAct">
-							<i class="background-close move_general move-btn fa fa-eye fa-2x" shows="show"></i>
-						</div>
-						<div style="display:inline;" class="clearState">
-							<i class="background-close move_general move-btn fa fa-close fa-2x" c_action="clear"></i>
-						</div>
+                        <div style="display:inline;" class="showAct">
+                                <i class="background-close move_general move-btn fa fa-eye fa-2x" shows="show"></i>
+                        </div>
+                        <div style="display:inline;" class="clearState">
+                                <i class="background-close move_general move-btn fa fa-close fa-2x" c_action="clear"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,6 +179,10 @@
 					  <div class="form-group-cst">
 						<label for="height_cm">Высота (см)</label>
 						<input type="text" class="form-control" id="height_cm" placeholder="" ac="height" oninput="resizeTT(this)">
+					  </div>
+                                            <div class="form-group">
+						<label for="print_name">Название принта</label>
+						<input type="text" class="form-control" id="print_name" value="print" placeholder="Введите имя сохраняемого принта" ac="print_name">
 					  </div>
 					  <button type="button" class="btn btn-default save_btn" onclick="test_cr()">Сохранить</button>
 					</div>
